@@ -1,4 +1,3 @@
-<%@page import="br.edu.ifsp.dsw1.model.entity.Link"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,11 +7,9 @@
 
 <body>
 
-	<jsp:include page="/includes/navBar.html"/>
+	<jsp:include page="/loggedin/includes/navBar.html"/>
 	
-	<h2 style="text-align: center; margin-top: 20px;">CADASTRE-SE E GERE LINKS PERSONALIZADOS!</h2>
-	
-	<form class="bg-white p-4 rounded-3 shadow" method="post" action="login.do?action=encurtarLink">
+	<form class="bg-white p-4 rounded-3 shadow" method="post" action="">
 		<label for="linkLongo" class="form-label" style="text-align: center;
 				margin-top: 20px; 
 				font-weight: 400; 
@@ -28,6 +25,5 @@
 	
 	<jsp:include page="/includes/scripts.html"/>
 	
-<body/>
-
+</body>
 </html>

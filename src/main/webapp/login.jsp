@@ -11,6 +11,15 @@
 	
 	<h1 style="text-align: center;">LOGIN</h1>
 	
+	<%
+		String msg = (String) request.getAttribute("message");
+		if (msg != null ) {
+			out.println("<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">");
+			out.println(msg);
+			out.println("<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>");
+		}
+	%>
+	
 	<jsp:include page="/includes/formLogin.html"/>
 	
 	<jsp:include page="/includes/scripts.html"/>

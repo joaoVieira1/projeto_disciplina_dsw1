@@ -6,13 +6,15 @@
 <jsp:include page="/includes/head.html"/>
 
 <body>
-
+	
 	<jsp:include page="/includes/navBar.html"/>
 	
-	<h1>GERE LINKS PERSONALIZADOS!</h1>
+	<h1>LOGIN</h1>
+	
+	<jsp:include page="/includes/formLogin.html"/>
 	
 	<jsp:include page="/includes/scripts.html"/>
 	
-<body/>
+</body>
 
 </html>

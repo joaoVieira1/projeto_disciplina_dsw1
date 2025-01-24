@@ -9,7 +9,7 @@
 
 	<jsp:include page="/includes/navBar.html"/>
 	
-	<h1>GERE LINKS PERSONALIZADOS!</h1>
+	<h2 style="text-align: center;">CADASTRE-SE E GERE LINKS PERSONALIZADOS!</h2>
 	
 	<jsp:include page="/includes/scripts.html"/>
 	

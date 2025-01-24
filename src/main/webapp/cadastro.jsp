@@ -9,7 +9,7 @@
 	
 	<jsp:include page="/includes/navBar.html"/>
 	
-	<h1>CADASTRO</h1>
+	<h1 style="text-align: center;">CADASTRO</h1>
 	
 	<jsp:include page="/includes/formCadastro.html"/>
 	

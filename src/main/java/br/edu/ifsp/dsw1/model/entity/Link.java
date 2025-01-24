@@ -7,10 +7,12 @@ public class Link {
 	private int id;
 	private String urlLonga;
 	private String urlCurta;
+	private int clicks;
 	
 	public Link() {
 		ultimoId += 1;
 		setId(ultimoId);
+		setClicks(0);
 	}
 
 	public Link(String urlLonga, String urlCurta) {
@@ -41,6 +43,14 @@ public class Link {
 
 	public void setUrlCurta(String urlCurta) {
 		this.urlCurta = urlCurta;
+	}
+
+	public int getClicks() {
+		return clicks;
+	}
+
+	public void setClicks(int clicks) {
+		this.clicks = clicks;
 	}
 	
 	

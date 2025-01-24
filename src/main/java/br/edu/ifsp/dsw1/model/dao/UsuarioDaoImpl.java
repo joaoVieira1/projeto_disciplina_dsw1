@@ -17,7 +17,8 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	//CREATE TABLE Link(
     //id INTEGER NOT NULL PRIMARY KEY,
     //urlLonga VARCHAR(128) NOT NULL,
-    //urlCurta VARCHAR(128) NOT NULL,
+    //urlCurta VARCHAR(128) NOT NULL UNIQUE KEY,
+	//clicks INTEGER NOT NULL,
     //usuario VARCHAR(128) NOT NULL,
     //FOREIGN KEY (usuario) REFERENCES Usuario(login) ON DELETE CASCADE);
 	

@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import br.edu.ifsp.dsw1.controller.command.Command;
 import br.edu.ifsp.dsw1.controller.command.loggin.CadastroUsuarioCommand;
+import br.edu.ifsp.dsw1.controller.command.loggin.EncurtarLinkCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.GetCadastroCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.GetIndexCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.GetLoginCommand;
@@ -43,6 +44,8 @@ public class LoginServlet extends HttpServlet {
 			command = new CadastroUsuarioCommand();
 		}else if(action.equals("loginUsuario")) {
 			command = new LoginUsuarioCommand();
+		}else if(action.equals("encurtarLink")) {
+			command = new EncurtarLinkCommand();
 		}
 		
 		String view = command.execute(request, response);

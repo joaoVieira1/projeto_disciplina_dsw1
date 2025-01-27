@@ -9,9 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import br.edu.ifsp.dsw1.controller.command.Command;
+import br.edu.ifsp.dsw1.controller.command.logged.EncurtarLinkLoggedCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.GetLoggedCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.LogoffCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.CadastroUsuarioCommand;
+import br.edu.ifsp.dsw1.controller.command.loggin.EncurtarLinkCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.GetCadastroCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.GetIndexCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.GetLoginCommand;
@@ -39,6 +41,8 @@ public class LoggedServlet extends HttpServlet {
 			command = new GetLoggedCommand();
 		}else if(action.equals("logoff")) {
 			command = new LogoffCommand();
+		}else if(action.equals("encurtarLink")){
+			command = new EncurtarLinkLoggedCommand();
 		}
 		
 		String view = command.execute(request, response);

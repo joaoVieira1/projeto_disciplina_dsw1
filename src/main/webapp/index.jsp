@@ -26,6 +26,21 @@
 		<button type="submit" class="btn btn-warning" style="text-align: center; margin-top: 20px;">Encurtar link</button>
 	</form>
 	
+	<%
+		String urlCurta = (String) request.getAttribute("urlCurta");
+		String urlLonga = (String) request.getAttribute("urlLonga");
+		
+		if(urlCurta != null && urlLonga != null){
+			out.println("<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">");
+			out.println("Link encurtado com sucesso!");
+	%>
+	
+	<br/><br/>
+	
+	<a href="<%=urlLonga%>"><%=urlCurta%></a>
+	
+	<%}%>	
+		
 	<jsp:include page="/includes/scripts.html"/>
 	
 <body/>

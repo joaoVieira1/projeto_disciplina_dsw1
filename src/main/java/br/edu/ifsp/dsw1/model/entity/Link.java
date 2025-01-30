@@ -80,7 +80,6 @@ public class Link {
 		return "Link [id=" + id + ", urlLonga=" + urlLonga + ", urlCurta=" + urlCurta + ", clicks=" + clicks
 				+ ", usuario=" + usuario + "]";
 	}
-	
-	
+
 	
 }

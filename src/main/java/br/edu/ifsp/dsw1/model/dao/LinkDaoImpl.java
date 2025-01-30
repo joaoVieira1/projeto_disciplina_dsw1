@@ -1,6 +1,7 @@
 package br.edu.ifsp.dsw1.model.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import br.edu.ifsp.dsw1.model.dao.connection.DatabaseConnection;
 import br.edu.ifsp.dsw1.model.entity.Link;
@@ -19,7 +20,7 @@ public class LinkDaoImpl implements LinkDao{
 	private static final String INSERT = "INSERT INTO Link (id, urlLonga, urlCurta, clicks, usuario) VALUES (?, ?, ?, ?, ?)";
 	private static final String FIND_BY_URL_CURTA ="SELECT * FROM Link WHERE urlCurta = ?";
 	private static final String PEGAR_ULTIMO_ID = "SELECT id FROM Link ORDER BY id DESC LIMIT 1";
-	
+	private static final String GET_ALL = "SELECT * FROM link WHERE usuario = ? ORDER BY usuario";
 	
 
 	@Override
@@ -69,9 +70,32 @@ public class LinkDaoImpl implements LinkDao{
 	}
 
 	@Override
-	public Link findByUrlCurta(String url) {
+	public List<Link> getAll(Usuario usuario) {
+		usuario.clearLinks();
+
+		try (var connection = DatabaseConnection.getConnection();
+			 var preparedStatement = connection.prepareStatement(GET_ALL)){
+			
+			preparedStatement.setString(1, usuario.getLogin());
+			var result = preparedStatement.executeQuery();
+
+			while (result.next()) {
+				var link = new Link();
+				link.setId(result.getInt("id"));
+				link.setUrlCurta(result.getString("urlCurta"));
+				link.setUrlLonga(result.getString("urlLonga"));
+				link.setClicks(result.getInt("clicks"));
+				link.setUsuario(result.getString("usuario"));
+				usuario.addLink(link);;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return usuario.getLinks();
 		
-		return null;
 	}
+
+	
 
 }

@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.LinkedList;
 import java.util.List;
 
+
 public class Usuario {
 	
 	private String login;
@@ -27,6 +28,16 @@ public class Usuario {
 		this.login = login;
 		this.senhaHash = senha;
 		links = new LinkedList<Link>();
+	}
+	
+	public void addLink(Link link) {
+		links.add(
+				link
+				);
+	}
+	
+	public void clearLinks() {
+		links.clear();
 	}
 	
 	public String getLogin() {

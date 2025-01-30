@@ -1,5 +1,6 @@
 package br.edu.ifsp.dsw1.model.dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -20,14 +21,15 @@ public class LinkDaoImpl implements LinkDao{
 	private static final String INSERT = "INSERT INTO Link (id, urlLonga, urlCurta, clicks, usuario) VALUES (?, ?, ?, ?, ?)";
 	private static final String FIND_BY_URL_CURTA ="SELECT * FROM Link WHERE urlCurta = ?";
 	private static final String PEGAR_ULTIMO_ID = "SELECT id FROM Link ORDER BY id DESC LIMIT 1";
-	private static final String GET_ALL = "SELECT * FROM link WHERE usuario = ? ORDER BY usuario";
-	
+	private static final String GET_ALL = "SELECT * FROM link WHERE usuario = ? ORDER BY clicks DESC";
+	private static final String DELETE = "DELETE FROM Link WHERE urlCurta = ?";
+	private static final String UPDATE_CLICK = "UPDATE Link SET clicks = ? WHERE urlCurta = ?";
 
 	@Override
 	public boolean insert(Link link) {
 		
 		int rows = 0;
-		
+				
 		if(link != null) {
 			
 			try(var connection = DatabaseConnection.getConnection();
@@ -95,7 +97,81 @@ public class LinkDaoImpl implements LinkDao{
 		return usuario.getLinks();
 		
 	}
-
 	
+	public boolean delete(Link link) {
+		
+		int rows = 0;
+		
+		if(link != null) {
+			try(var conn = DatabaseConnection.getConnection();
+					var statement = conn.prepareStatement(DELETE)){
+				
+				statement.setString(1, link.getUrlCurta());
+				
+				rows = statement.executeUpdate();
+				
+			}catch(SQLException e ) {
+				e.printStackTrace();
+			}
+			
+			return rows > 0;
+		}
+		
+		return false;
+	}
+
+	public Link findByUrlCurta(String urlCurta){
+		Link newLink = null;
+		
+		if(urlCurta != null && !urlCurta.isEmpty()) {
+			
+			try(var conn = DatabaseConnection.getConnection();
+					var statement = conn.prepareStatement(FIND_BY_URL_CURTA)){
+				
+				statement.setString(1, urlCurta);
+				
+				ResultSet result = statement.executeQuery();
+				
+				if(result.next()) {
+					newLink = new Link();
+					newLink.setUrlCurta(result.getString("urlCurta"));
+					newLink.setUrlLonga(result.getString("urlLonga"));
+					newLink.setId(result.getInt("id"));;
+					newLink.setClicks(result.getInt("clicks"));
+					newLink.setUsuario(result.getString("usuario"));
+				}
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return newLink;
+	}
+	
+	public boolean updateClicks(Link link) {
+		
+		int rows = 0;
+		int newClick = link.getClicks() + 1;
+
+		if(link != null) {
+			
+			try(var conn = DatabaseConnection.getConnection();
+					var statement = conn.prepareStatement(UPDATE_CLICK)){
+				
+				statement.setInt(1, newClick);
+				statement.setString(2, link.getUrlCurta());
+				
+				rows = statement.executeUpdate();
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return rows > 0;
+		}
+		
+		return false;
+	}
 
 }

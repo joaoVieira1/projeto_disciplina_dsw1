@@ -10,4 +10,7 @@ public interface LinkDao {
 	boolean insert(Link link);
 	List<Link> getAll(Usuario usuario);
 	int getUltimoId();
+	public boolean delete(Link link);
+	public Link findByUrlCurta(String urlCurta);
+	public boolean updateClicks(Link link);
 }

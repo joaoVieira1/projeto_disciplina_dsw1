@@ -46,14 +46,14 @@
 			%>
 				<tr>
 					<th scope="row"><%= i %></th>
-					<td><a href="<%= link.getUrlLonga() %>" target="_blank"><%= link.getUrlLonga() %></a></td>
-					<td><%= link.getUrlCurta() %></td>
+					<td><%= link.getUrlLonga() %></td>
+					<td><a href="logged.do?action=redirecionamento&urlCurta=<%=link.getUrlCurta()%>">
+						<%=link.getUrlCurta()%></a></td>
 					<td><%= link.getClicks() %></td>
 					<td>
 						<a class="btn btn-outline-danger" 
-						onclick="return confirm('Confirma a exclusão?');" 
-						href="logged.do?action=deletar&id=<%=link.getId()%>" >
-						Deleta Link</a>
+						href="logged.do?action=deletar&urlCurta=<%=link.getUrlCurta()%>" >
+						Deletar Link</a>
 					</td>
 				</tr>
 			<%	i += 1;

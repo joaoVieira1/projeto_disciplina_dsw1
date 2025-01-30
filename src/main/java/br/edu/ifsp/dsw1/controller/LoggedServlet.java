@@ -15,6 +15,7 @@ import br.edu.ifsp.dsw1.controller.command.logged.GetLoggedCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.GetPersonalizarCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.LinksCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.LogoffCommand;
+import br.edu.ifsp.dsw1.controller.command.logged.RedirecionamentoCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.SalvarPersonalizadoCommand;
 
 
@@ -50,11 +51,22 @@ public class LoggedServlet extends HttpServlet {
 			command = new LinksCommand();
 		}else if(action.equals("deletar")) {
 			command = new DeletarLinkCommand();
+		}else if(action.equals("redirecionamento")) {
+			command = new RedirecionamentoCommand();
 		}
 		
-		String view = command.execute(request, response);
-		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-		dispatcher.forward(request, response);
+		if(command != null) {
+			String view = command.execute(request, response);
+			
+			if(view != null) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+				dispatcher.forward(request, response);
+			}
+		}else {
+	        response.sendError(HttpServletResponse.SC_NOT_FOUND, "Comando não encontrado");
+	    }
+		
+		
 		
 	}
 	

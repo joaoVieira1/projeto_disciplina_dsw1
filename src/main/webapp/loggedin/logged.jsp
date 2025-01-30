@@ -32,9 +32,7 @@
 			out.println("Link encurtado com sucesso!");
 	%>
 	
-	<br/><br/>
-	
-	<a href="<%=urlLonga%>"><%=urlCurta%></a>
+
 	
 	<%}%>
 	

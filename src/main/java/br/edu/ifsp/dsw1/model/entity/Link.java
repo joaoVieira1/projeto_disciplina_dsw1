@@ -74,5 +74,13 @@ public class Link {
 		var dao = new LinkDaoFactory().factory();
 		return dao.getUltimoId();
 	}
+
+	@Override
+	public String toString() {
+		return "Link [id=" + id + ", urlLonga=" + urlLonga + ", urlCurta=" + urlCurta + ", clicks=" + clicks
+				+ ", usuario=" + usuario + "]";
+	}
+	
+	
 	
 }

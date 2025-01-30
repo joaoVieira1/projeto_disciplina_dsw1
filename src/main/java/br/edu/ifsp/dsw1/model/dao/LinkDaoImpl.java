@@ -16,7 +16,7 @@ public class LinkDaoImpl implements LinkDao{
 //  usuario VARCHAR(128) NOT NULL,
 //  FOREIGN KEY (usuario) REFERENCES Usuario(login) ON DELETE CASCADE);
 	
-	private static final String INSERT = "INSERT INTO Link (id, urlLonga, urlCurta, clicks,usuario) VALUES (?, ?, ?, ?, ?)";
+	private static final String INSERT = "INSERT INTO Link (id, urlLonga, urlCurta, clicks, usuario) VALUES (?, ?, ?, ?, ?)";
 	private static final String FIND_BY_URL_CURTA ="SELECT * FROM Link WHERE urlCurta = ?";
 	private static final String PEGAR_ULTIMO_ID = "SELECT id FROM Link ORDER BY id DESC LIMIT 1";
 	
@@ -50,15 +50,15 @@ public class LinkDaoImpl implements LinkDao{
 	}
 	
 	public int getUltimoId() {
-		int lastId = -1;
+		int lastId = 0;
 		
 		try(var connection = DatabaseConnection.getConnection();
 				var statement = connection.prepareStatement(PEGAR_ULTIMO_ID)){
 			var resultSet = statement.executeQuery();
 			
 			 if (resultSet.next()) {
-		            lastId = resultSet.getInt("id"); 
-		        }
+				 lastId = resultSet.getInt("id"); 
+		     }
 			
 		} catch (SQLException e) {
 			

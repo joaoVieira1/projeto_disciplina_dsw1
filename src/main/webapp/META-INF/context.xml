@@ -13,9 +13,9 @@
 		maxIdle="50"
 		maxWaitMillis="10000"
 		username="root"
-		password=""
+		password="root"
 		driverClassName="com.mysql.cj.jdbc.Driver"
-		url="jdbc:mysql://localhost:3306/encurtador_links_dsw1" 
+		url="jdbc:mysql://localhost:3306/projetoDSW1" 
 	
 	/>
 

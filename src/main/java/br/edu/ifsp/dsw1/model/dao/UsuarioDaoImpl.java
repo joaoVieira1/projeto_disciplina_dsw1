@@ -10,17 +10,11 @@ import br.edu.ifsp.dsw1.model.entity.Usuario;
 
 public class UsuarioDaoImpl implements UsuarioDao{
 	
-	//CREATE TABLE Usuario(
-    //login VARCHAR(128) UNIQUE KEY PRIMARY KEY NOT NULL,
-    //senha VARCHAR(128) NOT NULL);
-	
-	//CREATE TABLE Link(
-    //id INTEGER NOT NULL PRIMARY KEY,
-    //urlLonga VARCHAR(128) NOT NULL,
-    //urlCurta VARCHAR(128) NOT NULL UNIQUE KEY,
-	//clicks INTEGER NOT NULL,
-    //usuario VARCHAR(128) NOT NULL,
-    //FOREIGN KEY (usuario) REFERENCES Usuario(login) ON DELETE CASCADE);
+//	CREATE TABLE Usuario(
+//    login VARCHAR(128) UNIQUE KEY PRIMARY KEY NOT NULL,
+//    senha VARCHAR(128) NOT NULL);
+
+
 	
 	private static final String INSERT = "INSERT INTO Usuario (login, senha) VALUES (?, ?)";
 	private static final String FIND_BY_LOGIN ="SELECT * FROM Usuario WHERE login = ?";

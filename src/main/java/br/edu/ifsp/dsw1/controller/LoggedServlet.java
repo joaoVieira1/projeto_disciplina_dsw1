@@ -11,7 +11,9 @@ import java.io.IOException;
 import br.edu.ifsp.dsw1.controller.command.Command;
 import br.edu.ifsp.dsw1.controller.command.logged.EncurtarLinkLoggedCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.GetLoggedCommand;
+import br.edu.ifsp.dsw1.controller.command.logged.GetPersonalizarCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.LogoffCommand;
+import br.edu.ifsp.dsw1.controller.command.logged.SalvarPersonalizadoCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.CadastroUsuarioCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.EncurtarLinkCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.GetCadastroCommand;
@@ -43,6 +45,10 @@ public class LoggedServlet extends HttpServlet {
 			command = new LogoffCommand();
 		}else if(action.equals("encurtarLink")){
 			command = new EncurtarLinkLoggedCommand();
+		}else if(action.equals("getPersonalizar")) {
+			command = new GetPersonalizarCommand();
+		}else if(action.equals("salvarPersonalizado")) {
+			command = new SalvarPersonalizadoCommand();
 		}
 		
 		String view = command.execute(request, response);

@@ -3,10 +3,14 @@ package br.edu.ifsp.dsw1.controller.command.loggin;
 import java.io.IOException;
 
 import br.edu.ifsp.dsw1.controller.command.Command;
+import br.edu.ifsp.dsw1.model.dao.LinkDaoFactory;
+import br.edu.ifsp.dsw1.model.entity.Link;
+import br.edu.ifsp.dsw1.model.entity.Usuario;
 import br.edu.ifsp.dsw1.model.service.EncurtadorUrl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class EncurtarLinkCommand implements Command{
 
@@ -21,6 +25,7 @@ public class EncurtarLinkCommand implements Command{
 		
 		request.setAttribute("urlLonga", urlLonga);
 		request.setAttribute("urlCurta", urlCurta);
+		
 		
 		return "index.jsp";
 	}

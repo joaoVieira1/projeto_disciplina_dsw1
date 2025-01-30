@@ -29,6 +29,7 @@ public class LoginUsuarioCommand implements Command{
 			var session = request.getSession(true);
 			session.setAttribute("usuario", usuario);
 			session.setMaxInactiveInterval(24 * 60 * 60);
+			session.setAttribute("cadastrado", "cadastrado");
 			view = "logged.do?action=getLogged";
 		}else {
 			request.setAttribute("message", "Login ou senha inválidos");

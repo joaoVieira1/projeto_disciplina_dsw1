@@ -9,17 +9,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import br.edu.ifsp.dsw1.controller.command.Command;
+import br.edu.ifsp.dsw1.controller.command.logged.DeletarLinkCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.EncurtarLinkLoggedCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.GetLoggedCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.GetPersonalizarCommand;
+import br.edu.ifsp.dsw1.controller.command.logged.LinksCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.LogoffCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.SalvarPersonalizadoCommand;
-import br.edu.ifsp.dsw1.controller.command.loggin.CadastroUsuarioCommand;
-import br.edu.ifsp.dsw1.controller.command.loggin.EncurtarLinkCommand;
-import br.edu.ifsp.dsw1.controller.command.loggin.GetCadastroCommand;
-import br.edu.ifsp.dsw1.controller.command.loggin.GetIndexCommand;
-import br.edu.ifsp.dsw1.controller.command.loggin.GetLoginCommand;
-import br.edu.ifsp.dsw1.controller.command.loggin.LoginUsuarioCommand;
+
 
 
 @WebServlet("/logged.do")
@@ -49,6 +46,10 @@ public class LoggedServlet extends HttpServlet {
 			command = new GetPersonalizarCommand();
 		}else if(action.equals("salvarPersonalizado")) {
 			command = new SalvarPersonalizadoCommand();
+		}else if(action.equals("getLinks")) {
+			command = new LinksCommand();
+		}else if(action.equals("deletar")) {
+			command = new DeletarLinkCommand();
 		}
 		
 		String view = command.execute(request, response);

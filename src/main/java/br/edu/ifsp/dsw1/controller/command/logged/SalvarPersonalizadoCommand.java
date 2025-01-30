@@ -32,6 +32,7 @@ public class SalvarPersonalizadoCommand implements Command{
 				if (dao.insert(link)) {
 					request.setAttribute("urlLonga", linkLongo);
 					request.setAttribute("urlCurta", linkPersonalizado);
+					return "/loggedin/formPersonalizado.jsp";
 				}else {
 					session.setAttribute("mensagemErro", "O link personalizado ja foi cadastrado anteriormente ao sistema!!Tente outro!!!");
 	                return "/loggedin/formPersonalizado.jsp";

@@ -24,7 +24,7 @@
 		<label for="linkPersonalizado" class="form-label" style="text-align: center;
 				margin-top: 20px; 
 				font-weight: 400; 
-				font-size: 25px">LINK PERSONALIZADO:</label>
+				font-size: 25px">IDENTIFICADOR:</label>
 				
 		<input type="text" id="linkPersonalizado" class="form-control" 
 				aria-describedby="passwordHelpBlock" 

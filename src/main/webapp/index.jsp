@@ -40,6 +40,19 @@
 	<a href="<%=urlLonga%>"><%=urlCurta%></a>
 	
 	<%}%>	
+	
+	<%
+    String mensagemErro = (String) session.getAttribute("mensagemErro");
+    if (mensagemErro != null) {
+	%>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= mensagemErro %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+	<%
+    session.removeAttribute("mensagemErro");
+    }
+	%>
 		
 	<jsp:include page="/includes/scripts.html"/>
 	

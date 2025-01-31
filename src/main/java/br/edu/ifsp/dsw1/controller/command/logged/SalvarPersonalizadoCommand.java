@@ -6,6 +6,7 @@ import br.edu.ifsp.dsw1.controller.command.Command;
 import br.edu.ifsp.dsw1.model.dao.LinkDaoFactory;
 import br.edu.ifsp.dsw1.model.entity.Link;
 import br.edu.ifsp.dsw1.model.entity.Usuario;
+import br.edu.ifsp.dsw1.model.service.URLValidator;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,6 +24,11 @@ public class SalvarPersonalizadoCommand implements Command{
 		HttpSession session = request.getSession(false);
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		var dao = new LinkDaoFactory().factory();
+		
+		if (!URLValidator.isValidURL(linkLongo)) {
+			session.setAttribute("mensagemErro", "Url invalida, forneça uma URL valida por favor!!");
+			return "/loggedin/formPersonalizado.jsp";
+		}
 		
 		
 		if (usuario != null) {

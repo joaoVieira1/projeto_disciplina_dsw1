@@ -9,8 +9,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import br.edu.ifsp.dsw1.controller.command.Command;
+import br.edu.ifsp.dsw1.controller.command.logged.AtualizarLinkCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.DeletarLinkCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.EncurtarLinkLoggedCommand;
+import br.edu.ifsp.dsw1.controller.command.logged.GetAtualizarCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.GetLoggedCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.GetPersonalizarCommand;
 import br.edu.ifsp.dsw1.controller.command.logged.LinksCommand;
@@ -53,6 +55,10 @@ public class LoggedServlet extends HttpServlet {
 			command = new DeletarLinkCommand();
 		}else if(action.equals("redirecionamento")) {
 			command = new RedirecionamentoCommand();
+		}else if(action.equals("getAtualizar")) {
+			command = new GetAtualizarCommand();
+		}else if(action.equals("atualizar")) {
+			command = new AtualizarLinkCommand();
 		}
 		
 		if(command != null) {

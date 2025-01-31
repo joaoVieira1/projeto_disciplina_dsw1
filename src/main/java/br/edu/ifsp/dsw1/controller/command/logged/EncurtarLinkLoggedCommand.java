@@ -7,6 +7,7 @@ import br.edu.ifsp.dsw1.model.dao.LinkDaoFactory;
 import br.edu.ifsp.dsw1.model.entity.Link;
 import br.edu.ifsp.dsw1.model.entity.Usuario;
 import br.edu.ifsp.dsw1.model.service.EncurtadorUrl;
+import br.edu.ifsp.dsw1.model.service.URLValidator;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,6 +29,11 @@ public class EncurtarLinkLoggedCommand implements Command{
 		HttpSession session = request.getSession(false);
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		var dao = new LinkDaoFactory().factory();
+		
+		if (!URLValidator.isValidURL(urlLonga)) {
+			session.setAttribute("mensagemErro", "Url invalida, forneça uma URL valida por favor!!");
+			return "/loggedin/logged.jsp";
+		}
 		
 		if (usuario != null) {
 			Link link = new Link(urlLonga, urlCurta, usuario.getLogin());

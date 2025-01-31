@@ -34,9 +34,10 @@
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">URL LONGA</th>
-					<th scope="col">URL CURTA</th>
+					<th scope="col">IDENTIFICADOR</th>
 					<th scope="col">CLICKS</th>
 					<th scope="col">DELETAR</th>
+					<th scope="col">ATUALIZAR</th>
 				</tr>
 			</thead>
 			<tbody class="table-group-divider">
@@ -54,6 +55,11 @@
 						<a class="btn btn-outline-danger" 
 						href="logged.do?action=deletar&urlCurta=<%=link.getUrlCurta()%>" >
 						Deletar Link</a>
+					</td>
+					<td>
+						<a class="btn btn-outline-danger" 
+						href="logged.do?action=getAtualizar&linkAtualizar=<%=link.getUrlCurta()%>" >
+						Atualizar Link</a>
 					</td>
 				</tr>
 			<%	i += 1;

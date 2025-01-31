@@ -14,6 +14,7 @@ import br.edu.ifsp.dsw1.controller.command.loggin.EncurtarLinkCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.GetCadastroCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.GetIndexCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.GetLoginCommand;
+import br.edu.ifsp.dsw1.controller.command.loggin.LinksPersonalizadosCommand;
 import br.edu.ifsp.dsw1.controller.command.loggin.LoginUsuarioCommand;
 
 
@@ -46,6 +47,8 @@ public class LoginServlet extends HttpServlet {
 			command = new LoginUsuarioCommand();
 		}else if(action.equals("encurtarLink")) {
 			command = new EncurtarLinkCommand();
+		}else if(action.equals("getLinks")) {
+			command = new LinksPersonalizadosCommand();
 		}
 		
 		String view = command.execute(request, response);

@@ -7,6 +7,7 @@ import br.edu.ifsp.dsw1.model.dao.LinkDaoFactory;
 import br.edu.ifsp.dsw1.model.entity.Link;
 import br.edu.ifsp.dsw1.model.entity.Usuario;
 import br.edu.ifsp.dsw1.model.service.EncurtadorUrl;
+import br.edu.ifsp.dsw1.model.service.URLValidator;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,6 +23,13 @@ public class EncurtarLinkCommand implements Command{
 		
 		String urlCurta = EncurtadorUrl.getUrlCurta(urlLongaParameter);
 		String urlLonga = EncurtadorUrl.getUrlLonga(urlCurta);
+		
+		HttpSession session = request.getSession(false);
+		
+		if (!URLValidator.isValidURL(urlLonga)) {
+			session.setAttribute("mensagemErro", "Url invalida, forneça uma URL valida por favor!!");
+			return "index.jsp";
+		}
 		
 		request.setAttribute("urlLonga", urlLonga);
 		request.setAttribute("urlCurta", urlCurta);

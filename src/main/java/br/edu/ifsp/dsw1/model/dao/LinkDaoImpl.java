@@ -2,6 +2,7 @@ package br.edu.ifsp.dsw1.model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifsp.dsw1.model.dao.connection.DatabaseConnection;
@@ -21,9 +22,13 @@ public class LinkDaoImpl implements LinkDao{
 	private static final String INSERT = "INSERT INTO Link (id, urlLonga, urlCurta, clicks, usuario) VALUES (?, ?, ?, ?, ?)";
 	private static final String FIND_BY_URL_CURTA ="SELECT * FROM Link WHERE urlCurta = ?";
 	private static final String PEGAR_ULTIMO_ID = "SELECT id FROM Link ORDER BY id DESC LIMIT 1";
-	private static final String GET_ALL = "SELECT * FROM link WHERE usuario = ? ORDER BY clicks DESC";
+	private static final String GET_ALL_BY_USUARIO = "SELECT * FROM link WHERE usuario = ? ORDER BY clicks DESC";
+	private static final String GET_ALL = "SELECT * FROM link";
 	private static final String DELETE = "DELETE FROM Link WHERE urlCurta = ?";
 	private static final String UPDATE_CLICK = "UPDATE Link SET clicks = ? WHERE urlCurta = ?";
+	private static final String UPDATE_LINK = "UPDATE Link SET urlLonga = ?, urlCurta = ? WHERE id = ?";
+	private static final String UPDATE_LINK_LONGO = "UPDATE Link SET urlLonga = ? WHERE id = ?";
+
 
 	@Override
 	public boolean insert(Link link) {
@@ -72,11 +77,11 @@ public class LinkDaoImpl implements LinkDao{
 	}
 
 	@Override
-	public List<Link> getAll(Usuario usuario) {
+	public List<Link> getAllByUsuario(Usuario usuario) {
 		usuario.clearLinks();
 
 		try (var connection = DatabaseConnection.getConnection();
-			 var preparedStatement = connection.prepareStatement(GET_ALL)){
+			 var preparedStatement = connection.prepareStatement(GET_ALL_BY_USUARIO)){
 			
 			preparedStatement.setString(1, usuario.getLogin());
 			var result = preparedStatement.executeQuery();
@@ -97,6 +102,7 @@ public class LinkDaoImpl implements LinkDao{
 		return usuario.getLinks();
 		
 	}
+	
 	
 	public boolean delete(Link link) {
 		
@@ -172,6 +178,78 @@ public class LinkDaoImpl implements LinkDao{
 		}
 		
 		return false;
+	}
+	
+	public boolean updateLinkLongo(Link link) {
+		int rows = 0;
+		
+		if(link != null) {
+			
+			try(var conn = DatabaseConnection.getConnection();
+					var statement = conn.prepareStatement(UPDATE_LINK_LONGO)){
+				
+				statement.setString(1, link.getUrlLonga());
+				statement.setInt(2, link.getId());
+				
+				rows = statement.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return rows > 0;
+		}
+		
+		return false;
+	}
+	
+	public boolean updateLink(Link link) {
+		int rows = 0;
+		
+		if(link != null) {
+			
+			try(var conn = DatabaseConnection.getConnection();
+					var statement = conn.prepareStatement(UPDATE_LINK)){
+				
+				statement.setString(1, link.getUrlLonga());
+				statement.setString(2, link.getUrlCurta());
+				statement.setInt(3, link.getId());
+				
+				rows = statement.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return rows > 0;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public List<Link> getAll() {
+		List<Link> links = new ArrayList<>();
+
+	    try (var connection = DatabaseConnection.getConnection();
+	         var preparedStatement = connection.prepareStatement(GET_ALL);) {
+
+	    	 var resultSet = preparedStatement.executeQuery();
+	    	
+	        while (resultSet.next()) {
+	            var link = new Link();
+	            link.setId(resultSet.getInt("id"));
+	            link.setUrlCurta(resultSet.getString("urlCurta"));
+	            link.setUrlLonga(resultSet.getString("urlLonga"));
+	            link.setClicks(resultSet.getInt("clicks"));
+	            link.setUsuario(resultSet.getString("usuario"));
+	            links.add(link);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return links;
 	}
 
 }
